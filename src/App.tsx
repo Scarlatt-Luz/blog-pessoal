@@ -1,11 +1,16 @@
 import React from 'react';
 import './App.css';
-
-let nome = 'Scar';
+import Footer from './components/static/footer/Footer';
+import Navbar from './components/static/navbar/Navbar';
+import Home from './pages/home/Home';
 
 function App() {
   return (
-  <h1>{nome}</h1>
+    <>
+    <Navbar />
+     <Home />
+    <Footer />
+  </>
   );
 }
 
