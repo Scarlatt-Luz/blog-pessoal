@@ -1,0 +1,16 @@
+.imagem2{
+  background-image: url(../../assets/loginBg2.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100vh;
+  min-height: 100vh;
+}
+
+.texto2{
+  font-weight: bold !important;
+}
+
+.btnCancelar{
+  margin-right: 20px !important;
+}
