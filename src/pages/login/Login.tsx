@@ -1,16 +1,21 @@
-import React, {ChangeEvent, useState, useEffect} from 'react';
-import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
+import React, {ChangeEvent, useState, useEffect} from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-import { login } from '../../services/Service';
-import UserLogin from '../../models/UserLogin';
-import './Login.css';
+import { Box, Button, Grid, TextField, Typography } from '@material-ui/core'
+
+import './Login.css'
+import { login } from '../../services/Service'
+import UserLogin from '../../models/UserLogin'
+import { addToken } from '../../store/tokens/action'
 
 function Login() {
 
-  let history = useHistory();
-  const [token, setToken] = useLocalStorage('token');
+  let history = useHistory()
+
+  const dispatch = useDispatch()
+
+  const [token, setToken] = useState('')
 
   const [userLogin, setUserLogin] = useState<UserLogin>(
     {
@@ -28,7 +33,8 @@ function Login() {
   }
 
   useEffect(() => {
-    if(token != ''){
+    if(token !== ''){
+      dispatch(addToken(token))
       history.push('/home')
     }
   }, [token])

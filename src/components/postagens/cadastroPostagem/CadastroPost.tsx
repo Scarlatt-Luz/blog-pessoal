@@ -2,21 +2,25 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@material-ui/core"
 import './CadastroPost.css';
 import { useHistory, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
+import { useSelector } from 'react-redux';
 
 import Tema from '../../../models/Tema';
 import Postagem from '../../../models/Postagem';
 import { busca, buscaId, post, put } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function CadastroPost() {
 
     let history = useHistory();
     const { id } = useParams<{ id: string }>();
     const [temas, setTemas] = useState<Tema[]>([])
-    const [token, setToken] = useLocalStorage('token');
+    
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+      );
 
     useEffect(() => {
-        if (token == "") {
+        if (token === "") {
             alert("Você precisa estar logado")
             history.push("/login")
 

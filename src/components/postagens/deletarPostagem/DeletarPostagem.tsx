@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {Typography, Button, Box, Card, CardActions, CardContent } from "@material-ui/core"
 
 import { useHistory, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
+import { useSelector } from 'react-redux';
 
 import './DeletarPostagem.css';
 import Postagem from '../../../models/Postagem';
 import { buscaId, deleteId } from '../../../services/Service';
+
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function DeletarPostagem() {
   
@@ -14,9 +16,11 @@ function DeletarPostagem() {
 
     const {id} = useParams<{id: string}>()
 
-    const [token, setToken] = useLocalStorage('token')
-
     const [post, setPosts] = useState<Postagem>()
+
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+      (state) => state.tokens
+    );
   
     useEffect( () => {
         if(token == ""){

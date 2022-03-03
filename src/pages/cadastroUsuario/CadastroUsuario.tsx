@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import { Box, Button, Grid, TextField, Typography } from '@material-ui/core'
 import {Link, useHistory} from 'react-router-dom'
+
+import { Box, Button, Grid, TextField, Typography } from '@material-ui/core'
 
 import './CadastroUsuario.css'
 import { cadastroUsuario } from '../../services/Service'
@@ -8,8 +9,10 @@ import User from '../../models/User'
 
 function CadastroUsuario() {
 
-  let history = useHistory();
+    let history = useHistory()
+
     const [confirmarSenha,setConfirmarSenha] = useState<String>("")
+
     const [user, setUser] = useState<User>(
         {
             id: 0,
@@ -40,13 +43,13 @@ function CadastroUsuario() {
 
 
     function updatedModel(e: ChangeEvent<HTMLInputElement>) {
-
         setUser({
             ...user,
             [e.target.name]: e.target.value
         })
 
     }
+    
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
         if(confirmarSenha === user.senha && user.senha.length >= 8){

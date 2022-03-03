@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './App.css';
@@ -13,9 +14,11 @@ import ListaTema from './components/temas/listaTema/ListaTema';
 import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
+import store from './store/store';
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <Navbar />
       <Switch>
@@ -66,6 +69,7 @@ function App() {
       </Switch>
       <Footer />
     </Router>
+    </Provider>
   );
 }
 

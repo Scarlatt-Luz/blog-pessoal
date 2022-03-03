@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { useSelector } from 'react-redux'
 
-import './ListaTema.css';
-import Tema from '../../../models/Tema';
-import useLocalStorage from 'react-use-localstorage';
-import { busca } from '../../../services/Service';
+import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core'
+
+import './ListaTema.css'
+import Tema from '../../../models/Tema'
+import { busca } from '../../../services/Service'
+import { TokenState } from '../../../store/tokens/tokensReducer'
 
 function ListaTema() {
 
-  const [temas, setTemas] = useState<Tema[]>([])
-
-  const [token, setToken] = useLocalStorage('token')
-
   let history = useHistory()
 
+  const [temas, setTemas] = useState<Tema[]>([])
+
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  )
+
   useEffect(() => {
-    if(token == ''){
+    if(token === ''){
       alert("Por gentileza, realize o login!")
       history.push("/login")
     }

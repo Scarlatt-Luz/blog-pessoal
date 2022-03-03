@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Postagem from '../../../models/Postagem';
-import { busca } from '../../../services/Service'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import './ListaPostagem.css';
-import useLocalStorage from 'react-use-localstorage';
+import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import Postagem from '../../../models/Postagem'
+import { busca } from '../../../services/Service'
+import './ListaPostagem.css'
+import { TokenState } from '../../../store/tokens/tokensReducer'
 
 function ListaPostagem() {
-  const [posts, setPosts] = useState<Postagem[]>([])
-  const [token, setToken] = useLocalStorage('token');
   let history = useHistory();
 
+  const [posts, setPosts] = useState<Postagem[]>([])
+
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+)
+
   useEffect(() => {
-    if (token == "") {
+    if (token === "") {
       alert("Por gentileza, realize o login!")
       history.push("/login")
     }
