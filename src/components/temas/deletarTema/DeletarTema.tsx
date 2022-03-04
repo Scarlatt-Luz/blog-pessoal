@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import {Box, Card, CardActions, CardContent, Button, Typography} from '@material-ui/core'
 
@@ -26,7 +27,16 @@ function DeletarTema() {
   
     useEffect( () => {
         if(token === ""){
-            alert("Você precisa realizar o login!")
+          toast.error('Por gentileza, realize o login!', {
+            position: "top-right",
+            autoClose: 2000, 
+            hideProgressBar: false,
+            closeOnClick: true, 
+            pauseOnHover: false,
+            draggable: false, 
+            theme: "colored", 
+            progress: undefined
+        })
             history.push("/login")
         }
     }, [token])
@@ -52,7 +62,16 @@ function DeletarTema() {
           'Authorization': token
         }
       });
-      alert('Tema deletado com sucesso');
+      toast.success('Tema deletado com sucesso!', {
+        position: "top-right",
+        autoClose: 2000, 
+        hideProgressBar: false,
+        closeOnClick: true, 
+        pauseOnHover: false,
+        draggable: false, 
+        theme: "colored", 
+        progress: undefined
+    })
     }
   
     function nao() {

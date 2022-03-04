@@ -1,28 +1,31 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import './App.css';
-import CadastroPost from './components/postagens/cadastroPostagem/CadastroPost';
-import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
-import ListaPostagem from './components/postagens/listaPostagem/ListaPostagem';
-import Footer from './components/static/footer/Footer';
-import Navbar from './components/static/navbar/Navbar';
-import CadastroTema from './components/temas/cadastroTema/CadastroTema';
-import DeletarTema from './components/temas/deletarTema/DeletarTema';
-import ListaTema from './components/temas/listaTema/ListaTema';
-import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario';
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
-import store from './store/store';
+import CadastroPost from './components/postagens/cadastroPostagem/CadastroPost'
+import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem'
+import ListaPostagem from './components/postagens/listaPostagem/ListaPostagem'
+import Footer from './components/static/footer/Footer'
+import Navbar from './components/static/navbar/Navbar'
+import CadastroTema from './components/temas/cadastroTema/CadastroTema'
+import DeletarTema from './components/temas/deletarTema/DeletarTema'
+import ListaTema from './components/temas/listaTema/ListaTema'
+import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario'
+import Home from './pages/home/Home'
+import Login from './pages/login/Login'
+import store from './store/store'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
     <Provider store={store}>
+      <ToastContainer />
     <Router>
       <Navbar />
       <Switch>
-        <div>
+        <div style={{ minHeight: "100vh"}}>
           <Route exact path='/'>
             <Login />
           </Route>

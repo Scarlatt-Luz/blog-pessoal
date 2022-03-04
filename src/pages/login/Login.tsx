@@ -1,6 +1,7 @@
-import React, {ChangeEvent, useState, useEffect} from 'react'
+import React, { ChangeEvent, useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core'
 
@@ -23,35 +24,52 @@ function Login() {
       usuario: '',
       senha: '',
       token: ''
-  })
+    })
 
-  function updatedModel(e: ChangeEvent<HTMLInputElement>){
+  function updatedModel(e: ChangeEvent<HTMLInputElement>) {
     setUserLogin({
-      ...userLogin, 
-      [e.target.name] : e.target.value
+      ...userLogin,
+      [e.target.name]: e.target.value
     })
   }
 
   useEffect(() => {
-    if(token !== ''){
+    if (token !== '') {
       dispatch(addToken(token))
       history.push('/home')
     }
   }, [token])
 
-async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+  async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
 
     //console.log('userLogin: ' + Object.values(userLogin));
 
     try {
       await login(`/usuarios/logar`, userLogin, setToken)
-
-      alert('Usuário logado com sucesso!')
+        toast.success('Usuário logado com sucesso!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined
+        })
     } catch (error) {
-      alert('Dados do usuário inconsistentes. Erro ao logar!')
+        toast.error('Dados do usuário inconsistentes. Erro ao logar!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined
+        })
     }
-}
+  }
 
   return (
     <Grid container direction='row' justifyContent='center' alignItems='center' className='textos1'>
@@ -62,9 +80,9 @@ async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
             <TextField value={userLogin.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="usuario" label="usuário" variant='outlined' name='usuario' margin='normal' fullWidth />
 
             <TextField value={userLogin.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="senha" label="senha" variant='outlined' name='senha' margin='normal' type='password' fullWidth />
-              <Box marginTop={2} textAlign='center'>
-                  <Button className='button' type='submit' variant='contained' >Logar</Button>
-              </Box>
+            <Box marginTop={2} textAlign='center'>
+              <Button className='button' type='submit' variant='contained' >Logar</Button>
+            </Box>
           </form>
           <Box display='flex' justifyContent='center' marginTop={2}>
             <Box marginRight={1} >
@@ -72,7 +90,7 @@ async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
             </Box>
             <Link to='/cadastro-usuario'>
               <Typography variant='subtitle1' gutterBottom align='center' className='textos1'>Cadastre-se</Typography>
-              </Link>
+            </Link>
           </Box>
         </Box>
       </Grid>

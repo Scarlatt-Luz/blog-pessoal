@@ -1,6 +1,7 @@
 import React, {useState, useEffect, ChangeEvent} from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { Container, Typography, TextField, Button } from "@material-ui/core"
 
@@ -24,7 +25,16 @@ function CadastroTema() {
   
     useEffect( () => {
         if(token === ""){
-            alert("Você precisar logar!")
+            toast.error('Por gentileza, realize o login!', {
+                position: "top-right",
+                autoClose: 2000, 
+                hideProgressBar: false,
+                closeOnClick: true, 
+                pauseOnHover: false,
+                draggable: false, 
+                theme: "colored", 
+                progress: undefined
+            })
             history.push("/login")
         }
     }, [token])
@@ -55,20 +65,37 @@ function CadastroTema() {
         //console.log("tema " + JSON.stringify(tema))
 
         if (id !== undefined) {
-            console.log(tema)
             put(`/temas`, tema, setTema, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Tema atualizado com sucesso');
+            toast.success('Tema atualizado com sucesso!', {
+                position: "top-right",
+                autoClose: 2000, 
+                hideProgressBar: false,
+                closeOnClick: true, 
+                pauseOnHover: false,
+                draggable: false, 
+                theme: "colored", 
+                progress: undefined
+            })
         } else {
             post(`/temas`, tema, setTema, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Tema cadastrado com sucesso');
+            toast.success('Tema cadastrado com sucesso!', {
+                position: "top-right",
+                autoClose: 2000, 
+                hideProgressBar: false,
+                closeOnClick: true, 
+                pauseOnHover: false,
+                draggable: false, 
+                theme: "colored", 
+                progress: undefined
+            })
         }
         back()
 
