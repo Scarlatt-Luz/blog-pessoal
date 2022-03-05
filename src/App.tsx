@@ -38,7 +38,7 @@ function App() {
             <Home />
           </Route>
 
-          <Route path='/cadastro-usuario'>
+          <Route path='/cadastrousuario'>
             <CadastroUsuario />
             </Route>
 
@@ -76,4 +76,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
